@@ -1,0 +1,165 @@
+/* MASONRY MODE FOR BETTER DARK AGE
+Courtesy : Murf, Daniel van der Merwe, Rob Hasfield
+*/
+
+:root {
+    --masonry-startWidth: 30vw; /* 400px; Change this to "unset" if you don't want the sidebar pages to be reset in grid like format each time*/
+    --masonry-minWidth: 10vw;
+    --masonry-maxWidth: 80vw;
+    --masonry-startHeight: unset; /* 242px; Change this to "unset" if you don't want the sidebar pages to be reset in grid like format each time*/
+    --masonry-minHeight: 10vh;
+    --right-sidebar-custom-width: 60%; /* 66.6%; When extended to 40/60 width, this will be the new width for the sidebar (set to 60% to keep Roam defaults) */
+    --left-sidebar-custom-width: 40%; /* 33.3%; When extended to 40/60 width, this will be the new width for the main left side window (set to 40% to keep Roam defaults) */
+ }
+#right-sidebar {
+    background-color: var(--sidebar-background);
+}
+#roam-right-sidebar-content {
+    overflow: auto !important;
+    background-color: var(--sidebar-background) !important;
+    margin-top: 2px;
+}
+.sidebar-content {
+    overflow: unset;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    height: 100%;
+    background-color: var(--sidebar-background) !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    -ms-flex-line-pack: start;
+        align-content: flex-start;
+}
+.sidebar-content > div:not(.rm-dnd-separator) {
+    margin-bottom: 10px !important;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: var(--background);
+    max-height: 100%;
+    margin-left: 10px;
+    -ms-flex-item-align: start;
+        align-self: flex-start; /* So pages can be diff widths in a single column */
+    border-radius: 12px;
+    border: none;
+}
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) {
+    border-bottom: unset !important;
+    height: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:first-child {
+    height: 40px;
+    min-width: calc(var(--masonry-minWidth) + 40px);
+    -webkit-box-align: center !important;
+        -ms-flex-align: center !important;
+                -ms-grid-row-align: center !important;
+            align-items: center !important;
+}
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) {
+    height: calc(100% - 40px);
+}
+/*NOTE: .rm-sidebar-outline and .rm-reference-main are at same level and so need to be addressed with div > div... as opposed to direct .classnames */
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1) {
+    resize: both;
+    overflow-y: scroll;
+    width: var(--masonry-startWidth);
+    min-width: var(--masonry-minWidth);
+    max-width: var(--masonry-maxWidth);
+    height: var(--masonry-startHeight);
+    min-height: var(--masonry-minHeight);
+    max-height: 100%;
+    margin-right: 8px !important;
+}
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) {
+    padding-bottom: 40px;
+    margin-left: -8px !important;
+}
+.sidebar-content .rm-reference-main > div {
+    margin-left: 0px !important;
+    margin-right: 5px !important;
+    padding-bottom: 40px;
+}
+/* SCROLLBAR */
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1)::-webkit-scrollbar {
+    width: unset;
+}
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1)::-webkit-scrollbar:hover {
+    background-color: var(--background);
+}
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1)::-webkit-resizer {
+    border-style: solid;
+    border-color: transparent var(--references) var(--references) transparent;
+    background-color: var(--background);
+    border-width: 3px;
+}
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1)::-webkit-scrollbar-button,
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1)::-webkit-scrollbar-thumb,
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1)::-webkit-scrollbar-track,
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1)::-webkit-scrollbar-track-piece,
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1)::-webkit-scrollbar-corner {
+    display: none;
+}
+/*Make the scrollbar smaller but keep the resize button the same*/
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div:nth-child(2) > div:nth-child(1):hover::-webkit-scrollbar-thumb {
+    display: block;
+    border-radius: 12px;
+    background-color: var(--closed-bullets);
+    border-style: solid;
+    border-width: 3.5px;
+    border-color: var(--background);
+}
+/* This allows for the main window to shrink below 40%. Default I have set here is for it to jump to 33% if you shrink all the way so that can do two "columns" of pages in the right sidebar to allow for "triple split screen mode" */
+.roam-main[style^="flex: 0 0 40."] {
+    -ms-flex-preferred-size: var(--left-sidebar-custom-width) !important;
+        flex-basis: var(--left-sidebar-custom-width) !important;
+}
+#right-sidebar[style^="position: relative; flex: 0 0 59."] {
+    -ms-flex-preferred-size: var(--right-sidebar-custom-width) !important;
+        flex-basis: var(--right-sidebar-custom-width) !important;
+}
+/* Block text widths to extend wider  */
+.roam-block-container {
+    max-width: unset !important;
+}
+.rm-block-text {
+    max-width: unset !important;
+}
+/* When long page titles or block refs are in sidebar they need to be shrunk */
+.sidebar-content > div:not(.rm-dnd-separator) > div:not(.rm-dnd-separator) > div.flex-h-box.window-headers > div:nth-child(2) {
+    max-width:  calc(var(--masonry-startWidth) - 10px);
+    max-height: 3em !important;
+    overflow: hidden;
+}
+/* Drag n Drop re-ordering */
+.sidebar-content > div.rm-dnd-separator {
+    left: 16px;
+    top: -3px;
+    width: calc(var(--masonry-minWidth));
+}
+.sidebar-content > div > div.rm-dnd-separator {
+    right: 100%;
+    top: 100%;
+}
+.sidebar-content .rm-dnd-separator .rm-dnd-drop-bar {
+  top: 3px;
+  left: 1px;
+  background-color: var(--icons-hover);
+}
+.sidebar-content .rm-dnd-separator {
+  width: unset;
+}
+.rm-dnd-drop-area, .rm-dnd-drop-bar {
+  min-width: var(--masonry-startWidth);
+}
+#right-sidebar .__________cytoscape_container {
+  width: var(--masonry-startWidth) !important;
+}
